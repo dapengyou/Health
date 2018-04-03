@@ -4,7 +4,16 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.test.baselibrary.base.BaseFragment;
+import com.test.health.App;
 import com.test.health.R;
+import com.test.health.glid.GlideImageLoader;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by lady_zhou on 2018/3/28.
@@ -12,6 +21,8 @@ import com.test.health.R;
 
 public class FirstFragment extends BaseFragment {
     public static final String TAG = FirstFragment.class.getSimpleName();//得到类名
+
+    private Banner banner;
 
     /**
      * 使用单例
@@ -25,7 +36,7 @@ public class FirstFragment extends BaseFragment {
 
     @Override
     protected void initData(Bundle arguments, Bundle savedInstanceState) {
-
+        banner.setImages(App.images).setImageLoader(new GlideImageLoader()).start();
     }
 
     @Override
@@ -35,6 +46,7 @@ public class FirstFragment extends BaseFragment {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        banner = findViewById(R.id.banner);
 
     }
 

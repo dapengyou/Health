@@ -117,4 +117,13 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
             Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
         }
     }
+
+    /**
+     * @param id
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    protected final <T extends View> T findViewById(int id) {
+        return (T) mRootView.findViewById(id);
+    }
 }

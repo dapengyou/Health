@@ -18,6 +18,7 @@
         android:id="@+id/main_bottom_navigator"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:background="@drawable/bg_write_corners"
         android:layout_alignParentBottom="true"
         android:clipChildren="false"
         android:elevation="8dp" />
