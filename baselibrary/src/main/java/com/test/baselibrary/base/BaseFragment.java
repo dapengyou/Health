@@ -20,6 +20,14 @@ import android.widget.Toast;
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
 
     private View mRootView;
+    public Activity mActivity;
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.mActivity = activity;
+    }
 
     @Nullable
     @Override
