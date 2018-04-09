@@ -243,5 +243,40 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp" />
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_write_corners">
+
+            <TextView
+                android:id="@+id/tv_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="商品推荐"
+                android:textSize="@dimen/txt_middle"
+                android:textColor="@color/text_black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:drawableRight="@mipmap/icon_disclosure_lndicator"
+                android:gravity="center"
+                android:text="查看全部"
+                android:textColor="@color/text_gray" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_list"
+                android:layout_below="@+id/tv_text2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp" />
+        </RelativeLayout>
     </LinearLayout>
 </ScrollView>

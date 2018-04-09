@@ -15,6 +15,7 @@ import com.test.health.App;
 import com.test.health.MockData.MockData;
 import com.test.health.R;
 import com.test.health.glid.GlideImageLoader;
+import com.test.health.ui.adapter.FirstFootAdapter;
 import com.test.health.ui.adapter.FirstHeadAdapter;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -45,6 +46,7 @@ public class FirstFragment extends BaseFragment {
     private View mViewTabTwo;
 
     private RecyclerView mRecyclerView;
+    private RecyclerView mVerticalRecycleView;
 
     /**
      * 使用单例
@@ -71,6 +73,8 @@ public class FirstFragment extends BaseFragment {
     @Override
     protected void initView(Bundle savedInstanceState) {
         mRecyclerView = findViewById(R.id.rl_list);//横向的RecycleView
+        mVerticalRecycleView = findViewById(R.id.rv_list);//纵向的RecycleView
+
         mBanner = findViewById(R.id.banner);
 
         mTvHealthExamination = findViewById(R.id.tv_health_examination);
@@ -85,12 +89,22 @@ public class FirstFragment extends BaseFragment {
         mViewTabOne = findViewById(R.id.rl_tab1);
         mViewTabTwo = findViewById(R.id.rl_tab2);
 
+        initAdapter();
+    }
+
+    private void initAdapter() {
+        //横向RecycleView
         LinearLayoutManager linearLayout = new LinearLayoutManager(mActivity);
         linearLayout.setOrientation(LinearLayoutManager.HORIZONTAL);
         linearLayout.canScrollHorizontally();
         mRecyclerView.setLayoutManager(linearLayout);
         mRecyclerView.setAdapter(new FirstHeadAdapter(MockData.getDatas(5)));
 
+        //纵向RecycleView
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
+        linearLayoutManager.canScrollVertically();
+        mVerticalRecycleView.setLayoutManager(linearLayoutManager);
+        mVerticalRecycleView.setAdapter(new FirstFootAdapter(MockData.getCommodityDatas(10)));
     }
 
     @Override

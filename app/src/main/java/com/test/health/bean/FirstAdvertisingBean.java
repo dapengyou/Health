@@ -6,9 +6,8 @@ import java.io.Serializable;
  * Created by lady_zhou on 2018/4/4.
  */
 
-public class FirstAdvertisingBean implements Serializable {
+public class FirstAdvertisingBean extends BaseBean {
     private String title;//标题
-    private String imageUrl;//图片
     private String time;//日期
 
     public String getTitle() {
@@ -19,13 +18,6 @@ public class FirstAdvertisingBean implements Serializable {
         this.title = title;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 
     public String getTime() {
         return time;
