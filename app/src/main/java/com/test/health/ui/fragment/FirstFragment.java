@@ -105,7 +105,7 @@ public class FirstFragment extends BaseFragment {
         linearLayout.canScrollHorizontally();
         mRecyclerView.setLayoutManager(linearLayout);
         mFirstHeadAdapter = new FirstHeadAdapter(MockData.getDatas(5));
-        mRecyclerView.setAdapter(mFirstFootAdapter);
+        mRecyclerView.setAdapter(mFirstHeadAdapter);
 
         //纵向RecycleView
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);

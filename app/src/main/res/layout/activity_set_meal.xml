@@ -137,7 +137,7 @@
                 android:padding="10dp"
                 android:text="￥1163.00"
                 android:textColor="@color/text_orange"
-                android:textSize="@dimen/txt_small" />
+                />
 
             <TextView
                 android:id="@+id/tv_app"
