@@ -1,5 +1,6 @@
 package com.test.health.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,11 +11,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.test.baselibrary.base.BaseFragment;
 import com.test.health.App;
 import com.test.health.MockData.MockData;
 import com.test.health.R;
 import com.test.health.glid.GlideImageLoader;
+import com.test.health.ui.activity.SetMealActivity;
 import com.test.health.ui.adapter.FirstFootAdapter;
 import com.test.health.ui.adapter.FirstHeadAdapter;
 import com.youth.banner.Banner;
@@ -47,6 +50,9 @@ public class FirstFragment extends BaseFragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView mVerticalRecycleView;
+
+    private FirstHeadAdapter mFirstHeadAdapter;
+    private FirstFootAdapter mFirstFootAdapter;
 
     /**
      * 使用单例
@@ -98,18 +104,26 @@ public class FirstFragment extends BaseFragment {
         linearLayout.setOrientation(LinearLayoutManager.HORIZONTAL);
         linearLayout.canScrollHorizontally();
         mRecyclerView.setLayoutManager(linearLayout);
-        mRecyclerView.setAdapter(new FirstHeadAdapter(MockData.getDatas(5)));
+        mFirstHeadAdapter = new FirstHeadAdapter(MockData.getDatas(5));
+        mRecyclerView.setAdapter(mFirstFootAdapter);
 
         //纵向RecycleView
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         linearLayoutManager.canScrollVertically();
         mVerticalRecycleView.setLayoutManager(linearLayoutManager);
-        mVerticalRecycleView.setAdapter(new FirstFootAdapter(MockData.getCommodityDatas(10)));
+        mFirstFootAdapter = new FirstFootAdapter(MockData.getCommodityDatas(10));
+        mVerticalRecycleView.setAdapter(mFirstFootAdapter);
     }
 
     @Override
     protected void initListener() {
-
+        //跳转到套现详情
+        mFirstFootAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(mActivity, SetMealActivity.class));
+            }
+        });
     }
 
     @Override

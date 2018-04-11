@@ -12,7 +12,7 @@
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/primary_gradient_bg"
+        android:background="@drawable/bg_primary_gradient"
         tools:ignore="UselessParent">
 
         <TextView
@@ -22,7 +22,7 @@
             android:layout_centerInParent="true"
             android:maxLength="10"
             android:singleLine="true"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="18sp" />
 
         <TextView
