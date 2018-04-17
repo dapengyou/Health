@@ -68,6 +68,10 @@ public class SetMealActivity extends TitleActivity {
     private MealOfPeopleAdapter mMealOfPeopleAdapter;
     private MealOfRecommendAdapter mMealOfRecommendAdapter;
 
+    private View mViewMealIntro;
+    private View mViewBranchHospital;
+    private View mViewProject;
+    private View mViewRecommend;
 
     @Override
     protected int getContentResId() {
@@ -80,11 +84,18 @@ public class SetMealActivity extends TitleActivity {
         mTvOldPrice = findViewById(R.id.tv_price_old);
         mTvPric = findViewById(R.id.tv_price);
         mTabLayout = findViewById(R.id.tablayout);
+        mScrollChangedScrollView = findViewById(R.id.scrollChangedScrollView);
 
         mRvPeople = findViewById(R.id.rv_people);
         mRvMeal = findViewById(R.id.rv_meal);
         mRvProject = findViewById(R.id.rv_project);
         mRvRecommend = findViewById(R.id.rv_list);
+
+        mViewMealIntro = findViewById(R.id.ll_meal_intro);
+        mViewBranchHospital = findViewById(R.id.tv_branch_hospital);
+        mViewProject = findViewById(R.id.ll_project);
+        mViewRecommend = findViewById(R.id.ll_recommend);
+
     }
 
     @Override
@@ -147,58 +158,69 @@ public class SetMealActivity extends TitleActivity {
 
     @Override
     protected void initListener() {
+        mScrollChangedScrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //表明当前的动作是由 ScrollView 触发和主导
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    tagFlag = true;
+                }
+                return false;
+            }
+        });
+        mScrollChangedScrollView.setScrollViewListener(new ScrollChangedScrollView.ScrollViewListener() {
 
+            @Override
+            public void onScrollChanged(ScrollView scrollView, int x, int y, int oldx, int oldy) {
+                scrollRefreshNavigationTag(scrollView);
+            }
+
+            @Override
+            public void onScrollStop(boolean isStop) {
+            }
+        });
+        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                //表明当前的动作是由 TabLayout 触发和主导
+                tagFlag = false;
+                // 根据点击的位置，使ScrollView 滑动到对应区域
+                int position = tab.getPosition();
+                // 计算点击的导航标签所对应内容区域的高度
+                int targetY = 0;
+                switch (position) {
+                    case 0:
+//                        targetY = mViewMealIntro.getTop();
+                        break;
+                    case 1:
+                        targetY = mViewBranchHospital.getTop();
+                        break;
+                    case 2:
+                        targetY = mViewProject.getTop();
+                        break;
+                    case 3:
+                        targetY = mViewRecommend.getTop();
+                        break;
+                    default:
+                        break;
+                }
+                // 移动到对应的内容区域
+                mScrollChangedScrollView.smoothScrollTo(0, targetY + 5);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
     }
 
     @Override
     protected void onViewClick(View v) {
-//        mScrollChangedScrollView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                //表明当前的动作是由 ScrollView 触发和主导
-//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-//                    tagFlag = true;
-//                }
-//                return false;
-//            }
-//        });
-//        mScrollChangedScrollView.setScrollViewListener(new ScrollChangedScrollView.ScrollViewListener() {
-//
-//            @Override
-//            public void onScrollChanged(ScrollView scrollView, int x, int y, int oldx, int oldy) {
-//                scrollRefreshNavigationTag(scrollView);
-//            }
-//
-//            @Override
-//            public void onScrollStop(boolean isStop) {
-//            }
-//        });
-//        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                //表明当前的动作是由 TabLayout 触发和主导
-//                tagFlag = false;
-//                // 根据点击的位置，使ScrollView 滑动到对应区域
-//                int position = tab.getPosition();
-//                // 计算点击的导航标签所对应内容区域的高度
-//                int targetY = 0;
-//                switch (position) {
-//
-//                    default:
-//                        break;
-//                }
-//                // 移动到对应的内容区域
-//                mScrollChangedScrollView.smoothScrollTo(0, targetY + 5);
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//            }
-//        });
+
     }
 
     /**
@@ -213,36 +235,15 @@ public class SetMealActivity extends TitleActivity {
         // 获得ScrollView滑动距离
         int scrollY = scrollView.getScrollY();
         // 确定ScrollView当前展示的顶部内容属于哪个内容模块
-//        if (scrollY > tv_9.getTop()) {
-//            refreshTab(9);
-//
-//        } else if (scrollY > tv_8.getTop()) {
-//            refreshTab(8);
-//
-//        } else if (scrollY > tv_7.getTop()) {
-//            refreshTab(7);
-//
-//        } else if (scrollY > tv_6.getTop()) {
-//            refreshTab(6);
-//
-//        } else if (scrollY > tv_5.getTop()) {
-//            refreshTab(5);
-//
-//        } else if (scrollY > tv_4.getTop()) {
-//            refreshTab(4);
-//
-//        } else if (scrollY > tv_3.getTop()) {
-//            refreshTab(3);
-//
-//        } else if (scrollY > tv_2.getTop()) {
-//            refreshTab(2);
-//
-//        } else if (scrollY > tv_1.getTop()) {
-//            refreshTab(1);
-//
-//        } else {
-//            refreshTab(0);
-//        }
+        if (scrollY > mViewRecommend.getTop()) {
+            refreshTab(3);
+        } else if (scrollY > mViewProject.getTop()) {
+            refreshTab(2);
+        } else if (scrollY > mViewBranchHospital.getTop()) {
+            refreshTab(1);
+        } else {
+            refreshTab(0);
+        }
     }
 
     /**
