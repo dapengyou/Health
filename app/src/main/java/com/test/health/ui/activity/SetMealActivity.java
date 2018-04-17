@@ -1,6 +1,7 @@
 package com.test.health.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
@@ -13,8 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.AbsoluteSizeSpan;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -105,12 +108,17 @@ public class SetMealActivity extends TitleActivity {
 
         setBottomData();
 
-        for (String tag : tabTag) {
+        for (int i = 0; i < tabTag.length; i++) {
             //只设置在字上边有图标，并且一直存在
 //            mTabLayout.addTab(mTabLayout.newTab().setText(tag).setIcon(R.mipmap.tag));
-            mTabLayout.addTab(mTabLayout.newTab().setText(tag));
+            mTabLayout.addTab(mTabLayout.newTab().setCustomView(setTab(tabTag[i], R.mipmap.tag, i)));
         }
-        //适合人群
+
+        setRecycleView();
+
+    }
+
+    private void setRecycleView() { //适合人群
         mRvPeople.setLayoutManager(new GridLayoutManager(this, 3));
         mMealOfPeopleAdapter = new MealOfPeopleAdapter(MockData.getPeopleDatas(2, false));
         mRvPeople.setAdapter(mMealOfPeopleAdapter);
@@ -134,6 +142,24 @@ public class SetMealActivity extends TitleActivity {
         int space = getResources().getDimensionPixelSize(R.dimen.dp_10);
         mRvRecommend.addItemDecoration(new SpaceItemDecoration(space, 2));
         mRvRecommend.setAdapter(mMealOfRecommendAdapter);
+    }
+
+    private View setTab(String name, int iconID, int position) {
+        View newtab = LayoutInflater.from(this).inflate(R.layout.layout_set_tablayout, null);
+        TextView tv = newtab.findViewById(R.id.tabtext);
+        tv.setText(name);
+        ImageView im = newtab.findViewById(R.id.tabicon);
+        im.setImageResource(iconID);
+        if (position == 0) {
+            tv.setTextColor(getResources().getColor(R.color.text_orange));
+            im.setImageResource(iconID);
+
+        } else {
+            tv.setTextColor(getResources().getColor(R.color.text_gray));
+            im.setImageResource(0);
+
+        }
+        return newtab;
     }
 
     /**
@@ -190,7 +216,6 @@ public class SetMealActivity extends TitleActivity {
                 int targetY = 0;
                 switch (position) {
                     case 0:
-//                        targetY = mViewMealIntro.getTop();
                         break;
                     case 1:
                         targetY = mViewBranchHospital.getTop();
@@ -206,16 +231,51 @@ public class SetMealActivity extends TitleActivity {
                 }
                 // 移动到对应的内容区域
                 mScrollChangedScrollView.smoothScrollTo(0, targetY + 5);
+                changeTabSelect(tab);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                changeTabNormal(tab);
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+    }
+
+    private void changeTabSelect(TabLayout.Tab tab) {
+        View view = tab.getCustomView();
+        ImageView img_title = (ImageView) view.findViewById(R.id.tabicon);
+        TextView txt_title = (TextView) view.findViewById(R.id.tabtext);
+
+        txt_title.setTextColor(getResources().getColor(R.color.text_orange));
+        if (txt_title.getText().toString().equals("套餐简介")) {
+            img_title.setImageResource(R.mipmap.tag);
+        } else if (txt_title.getText().toString().equals("适用分院")) {
+            img_title.setImageResource(R.mipmap.tag);
+        } else if (txt_title.getText().toString().equals("包含项目")) {
+            img_title.setImageResource(R.mipmap.tag);
+        } else {
+            img_title.setImageResource(R.mipmap.tag);
+        }
+    }
+
+    private void changeTabNormal(TabLayout.Tab tab) {
+        View view = tab.getCustomView();
+        ImageView img_title = (ImageView) view.findViewById(R.id.tabicon);
+        TextView txt_title = (TextView) view.findViewById(R.id.tabtext);
+        txt_title.setTextColor(getResources().getColor(R.color.text_gray));
+        if (txt_title.getText().toString().equals("套餐简介")) {
+            img_title.setImageResource(0);
+        } else if (txt_title.getText().toString().equals("适用分院")) {
+            img_title.setImageResource(0);
+        } else if (txt_title.getText().toString().equals("包含项目")) {
+            img_title.setImageResource(0);
+        } else {
+            img_title.setImageResource(0);
+        }
     }
 
     @Override
