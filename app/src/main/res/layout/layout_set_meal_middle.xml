@@ -1,47 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_write_corners"
-    android:orientation="horizontal">
+    android:background="@color/bg_gray"
+    android:gravity="center">
 
-    <TextView
-        android:layout_width="0dp"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="套餐简介"
-        android:textColor="@color/text_gray"
-        android:textSize="@dimen/txt_12" />
+        android:background="@drawable/bg_write_corners"
+        app:tabIndicatorColor="@color/text_write"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/text_orange"
+        app:tabTextColor="@color/text_black">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="适用分院"
-        android:textColor="@color/text_gray"
-        android:textSize="@dimen/txt_12" />
+    </android.support.design.widget.TabLayout>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="包含项目"
-        android:textColor="@color/text_gray"
-        android:textSize="@dimen/txt_12" />
+    <com.test.health.wight.ScrollChangedScrollView
+        android:id="@+id/scrollChangedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tablayout">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="推荐套餐"
-        android:textColor="@color/text_gray"
-        android:textSize="@dimen/txt_12" />
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--套餐简介-->
+            <LinearLayout
+                android:id="@+id/ll_meal_intro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_write_corners"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="20dp"
+                    android:text="适用人群"
+                    android:textSize="@dimen/txt_middle" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_people"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/bg_gray" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="20dp"
+                    android:text="套餐特点"
+                    android:textSize="@dimen/txt_middle" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_meal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:padding="10dp"></android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+            <!--适用分院-->
+            <TextView
+                android:id="@+id/tv_branch_hospital"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_write_corners"
+                android:drawableRight="@mipmap/icon_disclosure_lndicator"
+                android:padding="10dp"
+                android:text="查看可约分院和机构"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/txt_middle" />
+
+            <LinearLayout
+                android:id="@+id/ll_project"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_write_corners"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="包含项目"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/txt_middle" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/bg_gray"
+                    android:gravity="center"
+                    android:text="科室检查"
+                    android:textColor="@color/text_gray" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_project"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+
+            <include layout="@layout/layout_set_meal_end" />
+        </LinearLayout>
+    </com.test.health.wight.ScrollChangedScrollView>
+</RelativeLayout>

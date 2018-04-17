@@ -13,7 +13,7 @@
         android:padding="10dp"
         android:text="随时退"
         android:textColor="@color/text_black"
-        android:textSize="@dimen/txt_12" />
+        android:textSize="10sp" />
 
     <TextView
         android:layout_width="0dp"
@@ -23,7 +23,7 @@
         android:padding="10dp"
         android:text="随时改"
         android:textColor="@color/text_black"
-        android:textSize="@dimen/txt_12" />
+        android:textSize="10sp" />
 
     <TextView
         android:layout_width="0dp"
@@ -33,7 +33,7 @@
         android:padding="10dp"
         android:text="官方直营"
         android:textColor="@color/text_black"
-        android:textSize="@dimen/txt_12" />
+        android:textSize="10sp" />
 
     <TextView
         android:layout_width="0dp"
@@ -43,5 +43,5 @@
         android:padding="10dp"
         android:text="专业品质"
         android:textColor="@color/text_black"
-        android:textSize="@dimen/txt_12" />
+        android:textSize="10sp" />
 </LinearLayout>

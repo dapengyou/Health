@@ -1,9 +1,13 @@
 package com.test.health.MockData;
 
+import android.graphics.BitmapFactory;
 import android.widget.SimpleCursorTreeAdapter;
 
+import com.test.health.R;
 import com.test.health.bean.FirstAdvertisingBean;
 import com.test.health.bean.FirstCommodityBean;
+import com.test.health.bean.MealInfoProdectBean;
+import com.test.health.bean.MealOfPeopleBean;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +28,21 @@ public class MockData {
     public static final String[] types = {"中青年，防癌筛查，亚健康", "防癌筛查", "甲状腺", "糖尿病、肝部筛查",
             "针对心脑血管、肿瘤、骨质酥松检查", "血型、肝肾功能、传染疾病、遗传疾病、慢性病筛查"};
 
+    public static final String[] projectTitles = {"一般检查A", "内科", "男外科", "外眼", "眼底镜检查", "耳鼻咽喉科", "口腔科"};
+
+    public static final String[] projectContent = {"身高、体重、体重指数、收缩压、舒张压", "病史、家族史、心率、心律、心音", "皮肤、脊柱、四肢关节",
+            "外眼、眼科其他", "眼底镜检查", "既往史、外耳、外耳道、估摸、鼻腔、咽、扁桃体", "牙体、牙周"};
+
+    public static final String[] oldType = {"中老年", "少年", "中青年", "老年", "男性", "女性"};
+    public static final String[] oldpics = {"https://img-blog.csdn.net/20180416170057365?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xhZHlfemhvdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70",
+            "https://img-blog.csdn.net/20180416170513164?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xhZHlfemhvdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70",
+            "https://img-blog.csdn.net/20180416170538757?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xhZHlfemhvdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70",
+            "https://img-blog.csdn.net/20180416170607124?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xhZHlfemhvdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70",
+            "https://img-blog.csdn.net/20180416170637579?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xhZHlfemhvdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70",
+            "https://img-blog.csdn.net/20180416170659808?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xhZHlfemhvdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70",
+            "https://img-blog.csdn.net/20180416170726270?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xhZHlfemhvdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"};
+
+    public static final String[] sex = {"男", "女"};
     private static Random random = new Random();
 
     /**
@@ -98,18 +117,54 @@ public class MockData {
         return datas;
     }
 
-    public static List<FirstCommodityBean> getCommodityDatas(int count) {
+    public static List<FirstCommodityBean> getCommodityDatas(int count, boolean isShow) {
         List<FirstCommodityBean> datas = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             FirstCommodityBean firstCommodityBean = new FirstCommodityBean();
+            firstCommodityBean.setShow(isShow);
             firstCommodityBean.setImageUrl(getRndPic());
             firstCommodityBean.setPeopleNumber(getRndnumber());
             firstCommodityBean.setPrice(getRndPrice());
-            firstCommodityBean.setType(getRndType());
+            firstCommodityBean.setSex(sex[random.nextInt(sex.length)]);
             firstCommodityBean.setTitle(getCommodityTitles());
+            if (isShow) {
+                firstCommodityBean.setType(getRndType());
+            }
 
             datas.add(firstCommodityBean);
         }
         return datas;
     }
+
+    public static List<MealInfoProdectBean> getProjecDatas(int count) {
+        List<MealInfoProdectBean> datas = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            MealInfoProdectBean mealInfoProdectBean = new MealInfoProdectBean();
+            mealInfoProdectBean.setTitle(projectTitles[random.nextInt(projectTitles.length)]);
+            mealInfoProdectBean.setContent(projectContent[random.nextInt(projectContent.length)]);
+            datas.add(mealInfoProdectBean);
+        }
+        return datas;
+    }
+
+    public static List<MealOfPeopleBean> getPeopleDatas(int count, boolean isShow) {
+        List<MealOfPeopleBean> datas = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            MealOfPeopleBean mealOfPeopleBean = new MealOfPeopleBean();
+            mealOfPeopleBean.setShow(isShow);
+            if (isShow) {
+                mealOfPeopleBean.setImageUrl(oldpics[random.nextInt(oldpics.length)]);
+                mealOfPeopleBean.setIntroduction(types[random.nextInt(types.length)]);
+                mealOfPeopleBean.setTitle(projectTitles[random.nextInt(projectTitles.length)]);
+            } else {
+                mealOfPeopleBean.setImageUrl(oldpics[random.nextInt(2)]);
+                mealOfPeopleBean.setTitle(oldType[random.nextInt(2)]);
+            }
+            datas.add(mealOfPeopleBean);
+        }
+
+        return datas;
+    }
+
 }
+

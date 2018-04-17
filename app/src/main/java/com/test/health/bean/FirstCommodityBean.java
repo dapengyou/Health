@@ -12,6 +12,16 @@ public class FirstCommodityBean extends BaseBean {
     private String type;//类型
     private boolean isHaveSex;
 
+    private boolean isShow;//是否展示类型
+
+    public boolean isShow() {
+        return isShow;
+    }
+
+    public void setShow(boolean show) {
+        isShow = show;
+    }
+
     public boolean isHaveSex() {
         return isHaveSex;
     }

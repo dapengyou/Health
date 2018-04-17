@@ -51,8 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_write_corners"
-        android:drawableLeft="@mipmap/icon_disclosure_lndicator"
         android:drawableRight="@mipmap/icon_disclosure_lndicator"
+        android:gravity="center_vertical"
         android:padding="10dp"
         android:text="最高立减200元" />
 

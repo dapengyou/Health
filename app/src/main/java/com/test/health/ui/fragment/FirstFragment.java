@@ -111,7 +111,7 @@ public class FirstFragment extends BaseFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         linearLayoutManager.canScrollVertically();
         mVerticalRecycleView.setLayoutManager(linearLayoutManager);
-        mFirstFootAdapter = new FirstFootAdapter(MockData.getCommodityDatas(10));
+        mFirstFootAdapter = new FirstFootAdapter(MockData.getCommodityDatas(10,true));
         mVerticalRecycleView.setAdapter(mFirstFootAdapter);
     }
 

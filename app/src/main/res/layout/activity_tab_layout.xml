@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.test.health.ui.activity.TabLayoutActivity">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/anchor_tagContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#a930c3a6"
+        app:tabIndicatorColor="@color/blue"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/text_write"
+        app:tabTextColor="@color/text_gray" />
+
+    <com.test.health.wight.ScrollChangedScrollView
+        android:id="@+id/anchor_bodyContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/anchor_tagContainer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/old1" />
+
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="match_parent"
+                android:layout_height="486dp"
+                android:background="@color/text_gray"
+                android:gravity="center"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/tv_2"
+                android:layout_width="match_parent"
+                android:layout_height="420dp"
+                android:background="#a930c3a6"
+                android:gravity="center"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/tv_3"
+                android:layout_width="match_parent"
+                android:layout_height="630dp"
+                android:background="#568463"
+                android:gravity="center"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/tv_4"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/tv_5"
+                android:layout_width="match_parent"
+                android:layout_height="420dp"
+                android:background="@color/text_orange"
+                android:gravity="center"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/tv_6"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:background="@color/text_write"
+                android:gravity="center"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/tv_7"
+                android:layout_width="match_parent"
+                android:layout_height="503dp"
+                android:background="@color/text_gray"
+                android:gravity="center"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/tv_8"
+                android:layout_width="match_parent"
+                android:layout_height="272dp"
+                android:background="@color/text_yellow"
+                android:gravity="center"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/tv_9"
+                android:layout_width="match_parent"
+                android:layout_height="338dp"
+                android:background="#a930c3a6"
+                android:gravity="center"
+                android:textSize="36sp" />
+
+        </LinearLayout>
+    </com.test.health.wight.ScrollChangedScrollView>
+
+</RelativeLayout>
