@@ -121,7 +121,8 @@ public class SetMealActivity extends TitleActivity {
 
 }
 
-    private void setRecycleView() { //适合人群
+    private void setRecycleView() {
+        //适合人群
         mRvPeople.setLayoutManager(new GridLayoutManager(this, 3));
         mMealOfPeopleAdapter = new MealOfPeopleAdapter(MockData.getPeopleDatas(2, false));
         mRvPeople.setAdapter(mMealOfPeopleAdapter);

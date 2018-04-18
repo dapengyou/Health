@@ -1,10 +1,20 @@
 package com.test.health.ui.fragment;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.test.baselibrary.base.BaseFragment;
+import com.test.health.MockData.MockData;
 import com.test.health.R;
+import com.test.health.ui.adapter.FirstFootAdapter;
 
 /**
  * Created by lady_zhou on 2018/3/28.
@@ -12,6 +22,17 @@ import com.test.health.R;
 
 public class HospitalFragment extends BaseFragment {
     public static final String TAG = HospitalFragment.class.getSimpleName();//得到类名
+
+    private View mViewFront;//前面
+    private View mViewBackMap;//后面地图
+    private RecyclerView mRvHospital;
+    private FirstFootAdapter mFirstFootAdapter;
+
+    private ImageView mIvLocation;//定位图标
+    private AnimatorSet mRightOutAnimatorSet, mLeftInAnimatorSet;
+
+    private boolean mIsShowBack = false;  //是否显示背面
+
 
     /**
      * 使用单例
@@ -23,10 +44,6 @@ public class HospitalFragment extends BaseFragment {
         return fragment;
     }
 
-    @Override
-    protected void initData(Bundle arguments, Bundle savedInstanceState) {
-
-    }
 
     @Override
     protected int getLayoutId() {
@@ -35,16 +52,77 @@ public class HospitalFragment extends BaseFragment {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        mViewFront = findViewById(R.id.ll_front);
+        mViewBackMap = findViewById(R.id.ll_back_map);
+        mRvHospital = findViewById(R.id.rv_list);
+        mIvLocation = findViewById(R.id.iv_image);
 
+        setAnimators(); // 设置动画
+        setCameraDistance(); // 设置镜头距离
+    }
+
+    @Override
+    protected void initData(Bundle arguments, Bundle savedInstanceState) {
+        mRvHospital.setLayoutManager(new LinearLayoutManager(mActivity));
+        mFirstFootAdapter = new FirstFootAdapter(MockData.getCommodityDatas(10, false));
+        mRvHospital.setAdapter(mFirstFootAdapter);
     }
 
     @Override
     protected void initListener() {
-
+        mIvLocation.setOnClickListener(this);
     }
 
     @Override
     protected void onViewClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_image:
+                flipCard();
+                break;
+        }
+    }
+    private void setAnimators() {
+        mRightOutAnimatorSet = (AnimatorSet) AnimatorInflater.loadAnimator(mActivity, R.animator.anim_right_out);
+        mLeftInAnimatorSet = (AnimatorSet) AnimatorInflater.loadAnimator(mActivity, R.animator.anim_left_in);
 
+        // 设置点击事件
+        mRightOutAnimatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                mIvLocation.setClickable(false);
+            }
+        });
+
+        mLeftInAnimatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                mIvLocation.setClickable(true);
+            }
+        });
+    }
+
+    private void setCameraDistance() {
+        int distance = 16000;
+        float scale = getResources().getDisplayMetrics().density * distance;
+        mViewFront.setCameraDistance(scale);
+        mViewBackMap.setCameraDistance(scale);
+    }
+
+    private void flipCard() {
+        if (!mIsShowBack) {  // 正面朝上
+            mRightOutAnimatorSet.setTarget(mViewFront);
+            mLeftInAnimatorSet.setTarget(mViewBackMap);
+            mRightOutAnimatorSet.start();
+            mLeftInAnimatorSet.start();
+            mIsShowBack = true;
+        } else { // 背面朝上
+            mRightOutAnimatorSet.setTarget(mViewBackMap);
+            mLeftInAnimatorSet.setTarget(mViewFront);
+            mRightOutAnimatorSet.start();
+            mLeftInAnimatorSet.start();
+            mIsShowBack = false;
+        }
     }
 }
