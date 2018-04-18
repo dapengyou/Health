@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ScrollView;
@@ -15,7 +16,7 @@ import android.widget.ScrollView;
  * Created by lady_zhou on 2018/4/10.
  */
 
-public class ScrollChangedScrollView extends ScrollView {
+public class ScrollChangedScrollView extends NestedScrollView {
     private ScrollViewListener mScrollViewListener;
     private final int handleWhatId = 65984;
     private int lastY = 0;
@@ -56,7 +57,7 @@ public class ScrollChangedScrollView extends ScrollView {
          * @param oldx       上一个x轴坐标
          * @param oldy       上一个y轴坐标
          */
-        void onScrollChanged(ScrollView scrollView, int x, int y, int oldx, int oldy);
+        void onScrollChanged(NestedScrollView scrollView, int x, int y, int oldx, int oldy);
 
         /**
          * 是否滑动停止

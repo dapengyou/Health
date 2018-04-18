@@ -95,17 +95,17 @@ public class TabLayoutActivity extends AppCompatActivity {
                 return false;
             }
         });
-        sv_bodyContainer.setScrollViewListener(new ScrollChangedScrollView.ScrollViewListener() {
-
-            @Override
-            public void onScrollChanged(ScrollView scrollView, int x, int y, int oldx, int oldy) {
-                scrollRefreshNavigationTag(scrollView);
-            }
-
-            @Override
-            public void onScrollStop(boolean isStop) {
-            }
-        });
+//        sv_bodyContainer.setScrollViewListener(new ScrollChangedScrollView.ScrollViewListener() {
+//
+//            @Override
+//            public void onScrollChanged(ScrollView scrollView, int x, int y, int oldx, int oldy) {
+//                scrollRefreshNavigationTag(scrollView);
+//            }
+//
+//            @Override
+//            public void onScrollStop(boolean isStop) {
+//            }
+//        });
         tab_tagContainer.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

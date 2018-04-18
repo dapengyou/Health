@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.test.baselibrary.base.BaseActivity;
 import com.test.baselibrary.base.TitleActivity;
 import com.test.health.MockData.MockData;
 import com.test.health.R;
@@ -108,15 +110,16 @@ public class SetMealActivity extends TitleActivity {
 
         setBottomData();
 
-        for (int i = 0; i < tabTag.length; i++) {
+//        for (int i = 0; i < tabTag.length; i++) {
+        for (String tag : tabTag){
             //只设置在字上边有图标，并且一直存在
-//            mTabLayout.addTab(mTabLayout.newTab().setText(tag).setIcon(R.mipmap.tag));
-            mTabLayout.addTab(mTabLayout.newTab().setCustomView(setTab(tabTag[i], R.mipmap.tag, i)));
-        }
-
-        setRecycleView();
-
+            mTabLayout.addTab(mTabLayout.newTab().setText(tag));
+//            mTabLayout.addTab(mTabLayout.newTab().setCustomView(setTab(tabTag[i], R.mipmap.tag, i)));
     }
+
+    setRecycleView();
+
+}
 
     private void setRecycleView() { //适合人群
         mRvPeople.setLayoutManager(new GridLayoutManager(this, 3));
@@ -144,21 +147,21 @@ public class SetMealActivity extends TitleActivity {
         mRvRecommend.setAdapter(mMealOfRecommendAdapter);
     }
 
-    private View setTab(String name, int iconID, int position) {
+    private View setTab(String name, int iconID) {
         View newtab = LayoutInflater.from(this).inflate(R.layout.layout_set_tablayout, null);
         TextView tv = newtab.findViewById(R.id.tabtext);
         tv.setText(name);
         ImageView im = newtab.findViewById(R.id.tabicon);
         im.setImageResource(iconID);
-        if (position == 0) {
-            tv.setTextColor(getResources().getColor(R.color.text_orange));
-            im.setImageResource(iconID);
-
-        } else {
-            tv.setTextColor(getResources().getColor(R.color.text_gray));
-            im.setImageResource(0);
-
-        }
+//        if (position == 0) {
+//            tv.setTextColor(getResources().getColor(R.color.text_orange));
+//            im.setImageResource(iconID);
+//
+//        } else {
+//            tv.setTextColor(getResources().getColor(R.color.text_gray));
+//            im.setImageResource(0);
+//
+//        }
         return newtab;
     }
 
@@ -197,7 +200,7 @@ public class SetMealActivity extends TitleActivity {
         mScrollChangedScrollView.setScrollViewListener(new ScrollChangedScrollView.ScrollViewListener() {
 
             @Override
-            public void onScrollChanged(ScrollView scrollView, int x, int y, int oldx, int oldy) {
+            public void onScrollChanged(NestedScrollView scrollView, int x, int y, int oldx, int oldy) {
                 scrollRefreshNavigationTag(scrollView);
             }
 
@@ -231,12 +234,12 @@ public class SetMealActivity extends TitleActivity {
                 }
                 // 移动到对应的内容区域
                 mScrollChangedScrollView.smoothScrollTo(0, targetY + 5);
-                changeTabSelect(tab);
+//                changeTabSelect(tab);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                changeTabNormal(tab);
+//                changeTabNormal(tab);
             }
 
             @Override
@@ -288,7 +291,7 @@ public class SetMealActivity extends TitleActivity {
      *
      * @param scrollView 内容模块容器
      */
-    private void scrollRefreshNavigationTag(ScrollView scrollView) {
+    private void scrollRefreshNavigationTag(NestedScrollView scrollView) {
         if (scrollView == null) {
             return;
         }

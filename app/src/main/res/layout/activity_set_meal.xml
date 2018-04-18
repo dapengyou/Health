@@ -11,39 +11,23 @@
         android:background="@color/bg_gray"
         android:fitsSystemWindows="true">
 
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical"-->
-            <!--app:layout_scrollFlags="scroll|enterAlways">-->
-
-            <include
-                layout="@layout/layout_set_meal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways"
-                android:layout_marginBottom="10dp" />
-
-        <!--</LinearLayout>-->
+        <include
+            layout="@layout/layout_set_meal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:layout_scrollFlags="scroll|snap" />
 
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <include
+        layout="@layout/layout_set_meal_middle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <include
-            layout="@layout/layout_set_meal_middle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="56dp"
-            app:layout_collapseMode="pin" />
-
-    </LinearLayout>
+        android:layout_marginBottom="56dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_collapseMode="pin" />
 
     <LinearLayout
         android:layout_width="match_parent"
