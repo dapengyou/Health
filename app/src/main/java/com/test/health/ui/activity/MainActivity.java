@@ -1,6 +1,7 @@
 package com.test.health.ui.activity;
 
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,8 @@ public class MainActivity extends BaseActivity implements BottomNavigatorView.On
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        //有可能是在无可用的Activity或screen情况下，获取当前的窗口 并将窗口设置为透明色
+        getWindow().setFormat(PixelFormat.TRANSLUCENT);//解决地图黑屏
         mFragmentNavigator = new FragmentNavigator(getSupportFragmentManager(), new MainFragmentAdapter(), R.id.main_container);
         mFragmentNavigator.setDefaultPosition(0);
         mFragmentNavigator.onCreate(savedInstanceState);
