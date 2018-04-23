@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="150px"
+    android:background="@color/write"
+    android:orientation="vertical">
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/rv_list"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--</android.support.v7.widget.RecyclerView>-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="123455566" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/fram_reset_but"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#F4F4F4"
+            android:text="重置"
+            android:textColor="#666666"
+            android:textSize="32px" />
+
+        <Button
+            android:id="@+id/fram_ok_but"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/text_orange"
+            android:text="确定"
+            android:textColor="#ffffff"
+            android:textSize="32px" />
+    </LinearLayout>
+</RelativeLayout>

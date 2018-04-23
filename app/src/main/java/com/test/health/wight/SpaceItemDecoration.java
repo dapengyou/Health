@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
+ * 设置recycleView  Item之间的距离
+ *
  * Created by lady_zhou on 2018/4/17.
  */
 

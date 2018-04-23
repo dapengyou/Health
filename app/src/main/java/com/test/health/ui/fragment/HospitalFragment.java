@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,6 +25,9 @@ import com.test.baselibrary.base.BaseFragment;
 import com.test.health.MockData.MockData;
 import com.test.health.R;
 import com.test.health.ui.adapter.FirstFootAdapter;
+import com.test.health.wight.UiUtils;
+
+import java.util.List;
 
 /**
  * Created by lady_zhou on 2018/3/28.
@@ -151,9 +157,46 @@ public class HospitalFragment extends BaseFragment {
 
                 break;
             case R.id.ll_choose:
-                mDrawerLayout.openDrawer(Gravity.RIGHT);
+                //DrawerLayout
+//                mDrawerLayout.openDrawer(Gravity.RIGHT);
+                initPopuptWindow();
                 break;
         }
+    }
+
+    /**
+     * 创建PopupWindow
+     */
+    private PopupWindow mMenuPop;
+
+    protected void initPopuptWindow() {
+        View view = getLayoutInflater().inflate(R.layout.pop_list, null);
+
+        if (mMenuPop == null) {
+            mMenuPop = new PopupWindow(view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        }
+        mMenuPop.setBackgroundDrawable(new BitmapDrawable());
+        mMenuPop.setAnimationStyle(R.style.popupWindowAnimRight);
+        mMenuPop.setFocusable(true);
+        mMenuPop.showAtLocation(getView(), Gravity.NO_GRAVITY, 100, UiUtils.getStatusBarHeight(mActivity));
+        mMenuPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                dismissMenuPop();
+            }
+        });
+    }
+
+    /**
+     * 关闭窗口
+     */
+    private void dismissMenuPop() {
+        if (mMenuPop != null) {
+            mMenuPop.dismiss();
+            mMenuPop = null;
+        }
+
     }
 
     private void setAnimators() {
