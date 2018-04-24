@@ -29,5 +29,6 @@ dependencies {
     compile project(path: ':baselibrary')
     implementation 'com.youth.banner:banner:1.4.10'  //最新版本
     implementation "com.github.bumptech.glide:glide:3.7.0"
+    compile 'com.alibaba:fastjson:1.1.68.android'
 
 }

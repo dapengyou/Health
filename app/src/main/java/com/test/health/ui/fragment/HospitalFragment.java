@@ -9,25 +9,30 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.test.baselibrary.Utils.FileUtil;
 import com.test.baselibrary.base.BaseFragment;
 import com.test.health.MockData.MockData;
 import com.test.health.R;
+import com.test.health.bean.HospitalAnalysisBean;
+import com.test.health.bean.ValueBean;
 import com.test.health.ui.adapter.FirstFootAdapter;
 import com.test.health.wight.UiUtils;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by lady_zhou on 2018/3/28.
@@ -59,6 +64,17 @@ public class HospitalFragment extends BaseFragment {
     private View mViewCity;//城市
     private View mViewHospital;//分院
     private View mViewChoose;//筛选
+
+    //popWindow  recycleView
+    private RecyclerView mRvList;
+    private Button mBtReset;
+    private Button mBtSure;
+    private HospitalAnalysisBean mHospitalAnalysisBean;
+
+    private ArrayList<String> serverList = new ArrayList<>();//服务
+    private ArrayList<String> dayList = new ArrayList<>();//营业日
+    private ArrayList<String> facilityList = new ArrayList<>();//服务设备
+
 
     /**
      * 使用单例
@@ -161,6 +177,10 @@ public class HospitalFragment extends BaseFragment {
 //                mDrawerLayout.openDrawer(Gravity.RIGHT);
                 initPopuptWindow();
                 break;
+            case R.id.bt_reset:
+            case R.id.bt_sure:
+                dismissMenuPop();
+                break;
         }
     }
 
@@ -172,6 +192,14 @@ public class HospitalFragment extends BaseFragment {
     protected void initPopuptWindow() {
         View view = getLayoutInflater().inflate(R.layout.pop_list, null);
 
+        mRvList = view.findViewById(R.id.rv_list);
+        mBtReset = view.findViewById(R.id.bt_reset);
+        mBtSure = view.findViewById(R.id.bt_sure);
+
+        mBtSure.setOnClickListener(this);
+        mBtReset.setOnClickListener(this);
+
+        analysisJson();
         if (mMenuPop == null) {
             mMenuPop = new PopupWindow(view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
         }
@@ -186,6 +214,42 @@ public class HospitalFragment extends BaseFragment {
                 dismissMenuPop();
             }
         });
+    }
+
+    /**
+     * 解析json
+     */
+    private void analysisJson() {
+        String json = FileUtil.readStringFromAsset(mActivity, "hospitaljson.json");
+        ArrayList<HospitalAnalysisBean> hospitalAnalysis = (ArrayList<HospitalAnalysisBean>) JSON.parseArray(json, HospitalAnalysisBean.class);
+
+        for (int i = 0; i < hospitalAnalysis.size(); i++) {
+            if (hospitalAnalysis.get(0).getKey().equals("服务")) {
+                serverList = getValue(hospitalAnalysis, 0);
+            }
+            if (hospitalAnalysis.get(1).getKey().equals("服务设施")) {
+                facilityList = getValue(hospitalAnalysis, 1);
+            }
+            if (hospitalAnalysis.get(2).getKey().equals("营业日")) {
+                dayList = getValue(hospitalAnalysis, 2);
+            }
+        }
+    }
+
+    /**
+     * 得到相应的list
+     *
+     * @param hospitalAnalysis
+     * @param index  第几项
+     * @return
+     */
+    private ArrayList<String> getValue(ArrayList<HospitalAnalysisBean> hospitalAnalysis, int index) {
+        ArrayList<String> list = new ArrayList<>();
+        for (int j = 0; j < hospitalAnalysis.get(index).getValueBean().size(); j++) {
+            String value = hospitalAnalysis.get(index).getValueBean().get(j).getValue();
+            list.add(value);
+        }
+        return list;
     }
 
     /**

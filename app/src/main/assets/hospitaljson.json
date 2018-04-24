@@ -1,0 +1,43 @@
+[{
+    "key": "服务",
+    "valueBean": [{
+      "value": "体检"
+    }, {
+      "value": "齿科"
+    }, {
+      "value": "门诊"
+    }]
+  },
+  {
+    "key": "服务设施",
+    "valueBean": [{
+      "value": "有VIP检区"
+    }, {
+      "value": "免费WIFI"
+    }, {
+      "value": "免费停车"
+    }, {
+      "value": "英文接待"
+    }]
+  },
+  {
+    "key": "营业日",
+    "valueBean": [{
+        "value": "周一"
+      }, {
+        "value": "周二"
+      }, {
+        "value": "周三"
+      }, {
+        "value": "周四"
+      },
+      {
+        "value": "周五"
+      }, {
+        "value": "周六"
+      }, {
+        "value": "周日"
+      }
+    ]
+  }
+]
