@@ -30,6 +30,7 @@ import com.test.health.R;
 import com.test.health.bean.HospitalAnalysisBean;
 import com.test.health.bean.ValueBean;
 import com.test.health.ui.adapter.FirstFootAdapter;
+import com.test.health.wight.ExpandableTextView;
 import com.test.health.wight.UiUtils;
 
 import java.util.ArrayList;
@@ -195,6 +196,10 @@ public class HospitalFragment extends BaseFragment {
         mRvList = view.findViewById(R.id.rv_list);
         mBtReset = view.findViewById(R.id.bt_reset);
         mBtSure = view.findViewById(R.id.bt_sure);
+
+//        ExpandableTextView expandableTextView = view.findViewById(R.id.expand);
+//        expandableTextView.setText("考试的金风科技撒可富接口手机反馈是金风科技SDK访客撒酒疯可是就快递费就开始金风科技" +
+//                "刷卡缴费好看是几号放假书法家和数据返回时间的话福建师范结合实际返回数据电话费课上讲的发货数据库粉红色绝代风华");
 
         mBtSure.setOnClickListener(this);
         mBtReset.setOnClickListener(this);
