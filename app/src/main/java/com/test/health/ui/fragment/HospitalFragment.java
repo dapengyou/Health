@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -29,6 +30,7 @@ import com.test.health.MockData.MockData;
 import com.test.health.R;
 import com.test.health.bean.HospitalAnalysisBean;
 import com.test.health.bean.ValueBean;
+import com.test.health.ui.activity.AddressActivity;
 import com.test.health.ui.adapter.FirstFootAdapter;
 import com.test.health.wight.ExpandableTextView;
 import com.test.health.wight.UiUtils;
@@ -168,6 +170,8 @@ public class HospitalFragment extends BaseFragment {
                 flipCard();
                 break;
             case R.id.ll_choose_city:
+                startActivity(new Intent(mActivity, AddressActivity.class));
+                mActivity.overridePendingTransition(R.animator.anim_bottom_in,0);
 
                 break;
             case R.id.ll_choose_hospital:
@@ -245,7 +249,7 @@ public class HospitalFragment extends BaseFragment {
      * 得到相应的list
      *
      * @param hospitalAnalysis
-     * @param index  第几项
+     * @param index            第几项
      * @return
      */
     private ArrayList<String> getValue(ArrayList<HospitalAnalysisBean> hospitalAnalysis, int index) {
