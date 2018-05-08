@@ -27,7 +27,7 @@ public class AddressActivity extends TitleActivity {
     private TextView mTvTip;
     private ListView mListView;
     private AddressAdapter adapter;
-    private List<ContactSortBean> SourceDateList;
+    private List<ContactSortBean> sourceDateList;
     private EditText mEtSearch;
 
 
@@ -48,9 +48,10 @@ public class AddressActivity extends TitleActivity {
     }
 
     private void setAdapter() {
-        SourceDateList = filledData(getResources().getStringArray(R.array.contacts));
-        Collections.sort(SourceDateList, new PinyinComparator());
-        adapter = new AddressAdapter(this, SourceDateList);
+        //获取城市数据
+        sourceDateList = filledData(getResources().getStringArray(R.array.city));
+        Collections.sort(sourceDateList, new PinyinComparator());
+        adapter = new AddressAdapter(this, sourceDateList);
         mListView.setAdapter(adapter);
     }
 
@@ -70,7 +71,7 @@ public class AddressActivity extends TitleActivity {
                 //该字母首次出现的位置
                 int position = adapter.getPositionForSection(s.charAt(0));
                 if (position != -1) {
-                    mListView.setSelection(position + 1);
+                    mListView.setSelection(position);
                 }
             }
         });
@@ -115,10 +116,10 @@ public class AddressActivity extends TitleActivity {
     private void filterData(String filterStr) {
         List<ContactSortBean> mSortList = new ArrayList<>();
         if (TextUtils.isEmpty(filterStr)) {
-            mSortList = SourceDateList;
+            mSortList = sourceDateList;
         } else {
             mSortList.clear();
-            for (ContactSortBean sortModel : SourceDateList) {
+            for (ContactSortBean sortModel : sourceDateList) {
                 String name = sortModel.getName();
                 if (name.toUpperCase().indexOf(filterStr.toString().toUpperCase()) != -1 || PinyinUtils.getPingYin(name).toUpperCase().startsWith(filterStr.toString().toUpperCase())) {
                     mSortList.add(sortModel);

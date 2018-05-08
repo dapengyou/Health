@@ -7,6 +7,47 @@
         <item>http://img.zcool.cn/community/01700557a7f42f0000018c1bd6eb23.jpg</item>
     </array>
 
+    <string-array name="city">
+        <item>北京市</item>
+        <item>毕节市</item>
+        <item>常州市</item>
+        <item>成都市</item>
+        <item>长春市</item>
+        <item>重庆市</item>
+        <item>长沙市</item>
+        <item>福州市</item>
+        <item>佛山市</item>
+        <item>广州市</item>
+        <item>贵阳市</item>
+        <item>杭州市</item>
+        <item>江阴市</item>
+        <item>济南市</item>
+        <item>凯里市</item>
+        <item>六盘水市</item>
+        <item>绵阳市</item>
+        <item>南京市</item>
+        <item>宁波市</item>
+        <item>青岛市</item>
+        <item>上海市</item>
+        <item>深圳市</item>
+        <item>苏州市</item>
+        <item>沈阳市</item>
+        <item>天津市</item>
+        <item>潍坊市</item>
+        <item>威海市</item>
+        <item>芜湖市</item>
+        <item>武汉市</item>
+        <item>无锡市</item>
+        <item>西安市</item>
+        <item>烟台市</item>
+        <item>银川市</item>
+        <item>镇江市</item>
+        <item>乌鲁木齐市</item>
+        <item>伊宁市</item>
+        <item>兰州市</item>
+        <item>大连市</item>
+    </string-array>
+
     <string-array name="contacts">
         <item>毛泽东</item>
         <item>周恩来</item>
