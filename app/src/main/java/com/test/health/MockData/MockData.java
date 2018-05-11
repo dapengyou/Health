@@ -1,9 +1,5 @@
 package com.test.health.MockData;
 
-import android.graphics.BitmapFactory;
-import android.widget.SimpleCursorTreeAdapter;
-
-import com.test.health.R;
 import com.test.health.bean.FirstAdvertisingBean;
 import com.test.health.bean.FirstCommodityBean;
 import com.test.health.bean.MealInfoProdectBean;

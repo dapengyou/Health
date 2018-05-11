@@ -5,15 +5,13 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.test.health.ui.adapter.CollapsibleAdapter;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
- * Created by lady_zhou on 2018/4/23.
+ * Created by lady_zhou on 2018/5/10.
  */
 
-public class HospitalAnalysisBean extends AbstractExpandableItem<ValueBean> implements Serializable, MultiItemEntity {
+public class KeyBean extends AbstractExpandableItem<ValueBean> implements Serializable, MultiItemEntity {
     private String key;
-    private List<ValueBean> valueBean;
 
     public String getKey() {
         return key;
@@ -21,14 +19,6 @@ public class HospitalAnalysisBean extends AbstractExpandableItem<ValueBean> impl
 
     public void setKey(String key) {
         this.key = key;
-    }
-
-    public List<ValueBean> getValueBean() {
-        return valueBean;
-    }
-
-    public void setValueBean(List<ValueBean> valueBean) {
-        this.valueBean = valueBean;
     }
 
     @Override
