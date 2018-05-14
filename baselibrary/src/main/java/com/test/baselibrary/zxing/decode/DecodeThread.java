@@ -33,6 +33,8 @@ import java.util.concurrent.CountDownLatch;
 
 
 /**
+ * 解码的耗时线程
+ *
  * This thread does all the heavy lifting of decoding the images.
  *
  * @author dswitkin@google.com (Daniel Switkin)

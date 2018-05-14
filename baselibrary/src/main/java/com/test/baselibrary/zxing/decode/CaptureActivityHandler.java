@@ -36,6 +36,8 @@ import java.util.Vector;
 
 
 /**
+ * 完成数据转发的重要的工作类
+ *
  * This class handles all the messaging which comprises the state machine for
  * activity_qrcode_capture_layout.
  *

@@ -76,6 +76,8 @@ import java.util.Vector;
 
 
 /**
+ * 黑乎乎的页面
+ *
  * The barcode reader activity itself. This is loosely based on the
  * CameraPreview example included in the Android SDK.
  *
@@ -241,7 +243,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
                 source = Source.NATIVE_APP_INTENT;
                 decodeFormats = DecodeFormatManager.parseDecodeFormats(intent);
             } else if (dataString != null && dataString.contains(PRODUCT_SEARCH_URL_PREFIX)
-                && dataString.contains(PRODUCT_SEARCH_URL_SUFFIX)) {
+                    && dataString.contains(PRODUCT_SEARCH_URL_SUFFIX)) {
                 // Scan only products and send the result to mobile Product
                 // Search.
                 source = Source.PRODUCT_SEARCH_LINK;
@@ -396,7 +398,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
                 paint.setStrokeWidth(4.0f);
                 drawLine(canvas, paint, points[0], points[1]);
             } else if (points.length == 4 && (rawResult.getBarcodeFormat().equals(BarcodeFormat.UPC_A))
-                || (rawResult.getBarcodeFormat().equals(BarcodeFormat.EAN_13))) {
+                    || (rawResult.getBarcodeFormat().equals(BarcodeFormat.EAN_13))) {
                 // Hacky special case -- draw two lines, for the barcode and
                 // metadata
                 drawLine(canvas, paint, points[0], points[1]);

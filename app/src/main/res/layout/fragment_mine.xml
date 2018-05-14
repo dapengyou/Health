@@ -5,7 +5,11 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_zxing"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="mine" />
+        android:background="@drawable/bg_write_corners"
+        android:drawableRight="@mipmap/icon_disclosure_lndicator"
+        android:padding="10dp"
+        android:text="扫码" />
 </LinearLayout>
