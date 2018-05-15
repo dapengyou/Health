@@ -77,7 +77,7 @@ import java.util.Vector;
 
 /**
  * 黑乎乎的页面
- *
+ * <p>
  * The barcode reader activity itself. This is loosely based on the
  * CameraPreview example included in the Android SDK.
  *
@@ -146,18 +146,24 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        //引入页面布局
         setContentView(R.layout.activity_qrcode_capture_layout);
 
         Util.currentActivity = this;
         CameraManager.init(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 
+        //标题的返回键
         mButtonBack = (Button) findViewById(R.id.button_back);
         mButtonBack.setOnClickListener(click);
+        //二维码
         createBtn = (Button) findViewById(R.id.qrcode_btn);
         createBtn.setOnClickListener(click);
+        //相册
         photoBtn = (Button) findViewById(R.id.photo_btn);
         photoBtn.setOnClickListener(click);
+        //开灯
         flashBtn = (Button) findViewById(R.id.flash_btn);
         flashBtn.setOnClickListener(click);
 

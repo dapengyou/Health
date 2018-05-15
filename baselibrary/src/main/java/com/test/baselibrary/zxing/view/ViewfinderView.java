@@ -38,7 +38,7 @@ import java.util.HashSet;
 
 /**
  * 自定义扫码框的ui
- *
+ * <p>
  * This view is overlaid on top of the camera preview. It adds the viewfinder
  * rectangle and partial transparency outside it, as well as the laser scanner
  * animation and result points.
@@ -97,6 +97,11 @@ public final class ViewfinderView extends View {
         ScreenRate = (int) (15 * density);
     }
 
+    /**
+     * 重新绘制扫码框
+     *
+     * @param canvas
+     */
     @Override
     public void onDraw(Canvas canvas) {
         Rect frame = CameraManager.get().getFramingRect();
@@ -112,7 +117,7 @@ public final class ViewfinderView extends View {
         int width = canvas.getWidth();
         int height = canvas.getHeight();
 
-        // Draw the exterior (i.e. outside the framing rect) darkened
+        // Draw the exterior (i.e. outside the framing rect) darkened，透明框
         paint.setColor(resultBitmap != null ? resultColor : maskColor);
         canvas.drawRect(0, 0, width, frame.top, paint);
         canvas.drawRect(0, frame.top, frame.left, frame.bottom + 1, paint);
@@ -120,6 +125,7 @@ public final class ViewfinderView extends View {
                 paint);
         canvas.drawRect(0, frame.bottom + 1, width, height, paint);
 
+        //在角上画矩形
         if (resultBitmap != null) {
             // Draw the opaque result bitmap over the scanning rectangle
             paint.setAlpha(OPAQUE);
@@ -144,7 +150,8 @@ public final class ViewfinderView extends View {
             canvas.drawRect(frame.right - CORNER_WIDTH, frame.bottom
                     - ScreenRate, frame.right, frame.bottom, paint);
 
-            slideTop += SPEEN_DISTANCE;
+            //上下移动的线
+            slideTop += SPEEN_DISTANCE;//定义好扫描移动的速度
             if (slideTop >= frame.bottom) {
                 slideTop = frame.top;
             }
@@ -157,6 +164,7 @@ public final class ViewfinderView extends View {
                             .getDrawable(R.drawable.fle))).getBitmap(), null, lineRect,
                     paint);
 
+            //文字绘制
             paint.setColor(Color.WHITE);
             paint.setTextSize(TEXT_SIZE * density);
             paint.setAlpha(0x40);
@@ -184,6 +192,8 @@ public final class ViewfinderView extends View {
                             + point.getY(), 6.0f, paint);
                 }
             }
+
+            //下面是zxing 写好的
             if (currentLast != null) {
                 paint.setAlpha(OPAQUE / 2);
                 paint.setColor(resultPointColor);

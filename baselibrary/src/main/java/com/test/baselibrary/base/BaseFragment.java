@@ -4,14 +4,19 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.test.baselibrary.constant.Constant;
 
 /**
  * Created by lady_zhou on 2018/1/9.
@@ -133,5 +138,55 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     @SuppressWarnings("unchecked")
     protected final <T extends View> T findViewById(int id) {
         return (T) mRootView.findViewById(id);
+    }
+
+    /**
+     * 申请指定的权限.
+     */
+    public void requestPermission(int code, String... permissions) {
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            requestPermissions(permissions, code);
+        }
+    }
+
+    /**
+     * 判断是否有指定的权限
+     */
+    public boolean hasPermission(String... permissions) {
+
+        for (String permisson : permissions) {
+            if (ContextCompat.checkSelfPermission(getActivity(), permisson)
+                    != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case Constant.HARDWEAR_CAMERA_CODE:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    doOpenCamera();
+                }
+                break;
+            case Constant.WRITE_READ_EXTERNAL_CODE:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    doWriteSDCard();
+                }
+                break;
+        }
+    }
+
+    public void doOpenCamera() {
+
+    }
+
+    public void doWriteSDCard() {
+
     }
 }
