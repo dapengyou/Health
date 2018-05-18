@@ -24,7 +24,7 @@ import com.test.baselibrary.constant.Constant;
 
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
 
-    private View mRootView;
+    public View mRootView;
     public Activity mActivity;
 
 

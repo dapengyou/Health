@@ -13,13 +13,14 @@ import com.test.baselibrary.zxing.app.CaptureActivity;
 import com.test.health.R;
 import com.test.health.ui.MyQrCodeDialog;
 import com.test.health.ui.activity.AdBrowserActivity;
+import com.test.health.ui.activity.AndroidForJsActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by lady_zhou on 2018/3/28.
+ * Created by lady_zhou on 2018/5/18.
  */
 
 public class MineFragment extends BaseFragment {
@@ -29,6 +30,12 @@ public class MineFragment extends BaseFragment {
 
     private TextView mTvZxing;
     private TextView mTvMakeErWeiMa;
+    private TextView mTvAndroidForJs;
+//    @BindView(R.id.tv_zxing)
+//    TextView mTvZxing;
+//
+//    @BindView(R.id.tv_make_erweima)
+//    TextView mTvMakeErWeiMa;
 
     /**
      * 使用单例
@@ -52,19 +59,42 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+//        ButterKnife.bind(this, mRootView);
         mTvZxing = findViewById(R.id.tv_zxing);
         mTvMakeErWeiMa = findViewById(R.id.tv_make_erweima);
+        mTvAndroidForJs = findViewById(R.id.androidforjs);
     }
 
     @Override
     protected void initListener() {
         mTvZxing.setOnClickListener(this);
         mTvMakeErWeiMa.setOnClickListener(this);
+        mTvAndroidForJs.setOnClickListener(this);
     }
 
     @Override
     protected void onViewClick(View v) {
         switch (v.getId()) {
+            case R.id.tv_zxing:
+                if (hasPermission(Constant.HARDWEAR_CAMERA_PERMISSION)) {
+                    doOpenCamera();
+                } else {
+                    requestPermission(Constant.HARDWEAR_CAMERA_CODE, Constant.HARDWEAR_CAMERA_PERMISSION);
+                }
+                break;
+            case R.id.tv_make_erweima:
+                MyQrCodeDialog dialog = new MyQrCodeDialog(mActivity);
+                dialog.show();
+                break;
+            case R.id.androidforjs:
+                startActivity(new Intent(mActivity, AndroidForJsActivity.class));
+                break;
+        }
+    }
+
+    @OnClick({R.id.tv_zxing, R.id.tv_make_erweima})
+    public void onClickViewed(View view) {
+        switch (view.getId()) {
             case R.id.tv_zxing:
                 if (hasPermission(Constant.HARDWEAR_CAMERA_PERMISSION)) {
                     doOpenCamera();

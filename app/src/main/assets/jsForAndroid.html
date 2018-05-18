@@ -1,0 +1,31 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>android与js交互</title>
+  <style type="text/css">
+
+  </style>
+</head>
+
+<body>
+  <h2>android与js交互</h2>
+  <div> <span>你要输入的值:</span> <input type="text" id="input"></div>
+  <div id="btn"> <button type="button">点我</button></div>
+
+  <script type="text/javascript">
+    var buttonEle = document.getElementById("btn");
+    var inputEle = document.getElementById("input");
+
+    buttonEle.addEventListener("click", function() {
+      var str = inputEle.value;
+      if (window.androidforjs) {
+        androidforjs.setValue(str);
+      } else {
+        alert("不存在");
+      }
+    });
+  </script>
+</body>
+
+</html>

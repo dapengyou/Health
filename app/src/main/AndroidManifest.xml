@@ -22,7 +22,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -49,11 +48,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.TabLayoutActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.activity.AddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AddressActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ContentOverlay"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
 
         <!-- 二维码相关 -->
         <activity
@@ -61,7 +61,8 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.activity.AdBrowserActivity"/>
+        <activity android:name=".ui.activity.AdBrowserActivity" />
+        <activity android:name=".ui.activity.AndroidForJsActivity"></activity>
     </application>
 
 </manifest>
