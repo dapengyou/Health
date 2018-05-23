@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.test.baselibrary.base.BaseActivity;
@@ -22,6 +24,8 @@ public class AndroidForJsActivity extends BaseActivity implements JsBrige {
 
     //    @BindView(R.id.webview)
     private WebView mWebView;
+    private EditText mEditText;
+    private Button mBtClick;
 
     private Handler mHandler;
 
@@ -35,6 +39,8 @@ public class AndroidForJsActivity extends BaseActivity implements JsBrige {
 //        ButterKnife.bind(this);
         mWebView = findViewById(R.id.webview);
         mTvText = findViewById(R.id.tv_text);
+        mEditText = findViewById(R.id.edittext);
+        mBtClick = findViewById(R.id.bt_click);
         mHandler = new Handler();
     }
 
@@ -46,16 +52,26 @@ public class AndroidForJsActivity extends BaseActivity implements JsBrige {
         mWebView.addJavascriptInterface(new JsInterface(this), "androidforjs");
         //加载本的html
         mWebView.loadUrl("file:///android_asset/jsForAndroid.html");
+
+        //打开允许调试的开关
+        mWebView.setWebContentsDebuggingEnabled(true);
+
     }
 
     @Override
     protected void initListener() {
-
+        mBtClick.setOnClickListener(this);
     }
 
     @Override
     protected void onViewClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.bt_click:
+                String str = mEditText.getText().toString();
+                //android  调用js 方法
+                mWebView.loadUrl("javascript:if(window.remote){window.remote('" + str + "')}");
+                break;
+        }
     }
 
     @Override

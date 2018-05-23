@@ -62,7 +62,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".ui.activity.AdBrowserActivity" />
-        <activity android:name=".ui.activity.AndroidForJsActivity"></activity>
+        <activity android:name=".ui.activity.AndroidForJsActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>
