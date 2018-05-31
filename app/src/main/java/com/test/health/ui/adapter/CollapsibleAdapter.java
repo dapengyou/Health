@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.test.health.R;
 import com.test.health.bean.HospitalAnalysisBean;
 import com.test.health.bean.ValueBean;
+import com.test.health.wight.SpaceItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +26,9 @@ public class CollapsibleAdapter extends BaseMultiItemQuickAdapter<MultiItemEntit
     public static final int TYPE_BODY = 1;
     private List<HospitalAnalysisBean> mValueBeans;
     private HospitalAnalysisBean hospitalAnalysisBean;
-    private List<ValueBean> serverList = new ArrayList<>();//服务
-    private ArrayList<ValueBean> dayList = new ArrayList<>();//营业日
-    private ArrayList<ValueBean> facilityList = new ArrayList<>();//服务设备
     private int position = -1;
+
+    private RecyclerView recyclerView;
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
@@ -47,7 +47,7 @@ public class CollapsibleAdapter extends BaseMultiItemQuickAdapter<MultiItemEntit
     protected void convert(final BaseViewHolder helper, MultiItemEntity item) {
         switch (item.getItemType()) {
             case TYPE_HEAD:
-               final HospitalAnalysisBean hospitalAnalysisBean = (HospitalAnalysisBean) item;
+                hospitalAnalysisBean = (HospitalAnalysisBean) item;
 
                 helper.setText(R.id.tv_name, hospitalAnalysisBean.getKey());
                 helper.setImageResource(R.id.iv_image, hospitalAnalysisBean.isExpanded() ? R.mipmap.dive_up : R.mipmap.dive_down);
@@ -72,18 +72,24 @@ public class CollapsibleAdapter extends BaseMultiItemQuickAdapter<MultiItemEntit
             case TYPE_BODY:
                 helper.setNestView(R.id.item_recycle); // u can set nestview id
 
-                final RecyclerView recyclerView = helper.getView(R.id.rv_list);
-                recyclerView.setLayoutManager(new GridLayoutManager(helper.getConvertView().getContext(), 3));
-                recyclerView.setHasFixedSize(true);
+                recyclerView = helper.getView(R.id.rv_list);
+                if (recyclerView.getAdapter() == null) {
+                    recyclerView.setLayoutManager(new GridLayoutManager(helper.getConvertView().getContext(), 3));
+//                    recyclerView.setHasFixedSize(true);
+                    int space = mContext.getResources().getDimensionPixelSize(R.dimen.dp_10);
+                    recyclerView.addItemDecoration(new SpaceItemDecoration(space, 3));
 
-//                int space = mContext.getResources().getDimensionPixelSize(R.dimen.dp_10);
-//                recyclerView.addItemDecoration(new SpaceItemDecoration(space, 3));
-                for (int i = 0; i < mValueBeans.size(); i++) {
-                    if (i == position) {
-                        NestAdapter nestAdapter = new NestAdapter(mValueBeans.get(position).getValueBean());
-                        nestAdapter.setOnItemChildClickListener(this);
-                        nestAdapter.setOnItemClickListener(this);
-                        recyclerView.setAdapter(nestAdapter);
+                    NestAdapter nestAdapter = new NestAdapter(hospitalAnalysisBean.getValueBean());
+                    nestAdapter.setOnItemChildClickListener(this);
+                    nestAdapter.setOnItemClickListener(this);
+                    recyclerView.setAdapter(nestAdapter);
+
+                } else {
+                    if (recyclerView.getAdapter() instanceof NestAdapter) {
+                        ((NestAdapter) recyclerView.getAdapter()).setNewData(hospitalAnalysisBean.getValueBean());
+                        ((NestAdapter) recyclerView.getAdapter()).setOnItemChildClickListener(this);
+                        ((NestAdapter) recyclerView.getAdapter()).setOnItemClickListener(this);
+                        recyclerView.getAdapter().notifyDataSetChanged();
                     }
                 }
 
@@ -91,6 +97,16 @@ public class CollapsibleAdapter extends BaseMultiItemQuickAdapter<MultiItemEntit
         }
     }
 
+    private void setData() {
+        for (int i = 0; i < mValueBeans.size(); i++) {
+            if (i == position) {
+                NestAdapter nestAdapter = new NestAdapter(mValueBeans.get(position).getValueBean());
+                nestAdapter.setOnItemChildClickListener(this);
+                nestAdapter.setOnItemClickListener(this);
+                recyclerView.setAdapter(nestAdapter);
+            }
+        }
+    }
 
     @Override
     public boolean onItemChildClick(BaseQuickAdapter adapter, View view, int position) {

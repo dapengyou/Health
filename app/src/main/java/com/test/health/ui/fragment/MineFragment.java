@@ -14,6 +14,7 @@ import com.test.health.R;
 import com.test.health.ui.MyQrCodeDialog;
 import com.test.health.ui.activity.AdBrowserActivity;
 import com.test.health.ui.activity.AndroidForJsActivity;
+import com.test.health.ui.activity.MusicActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,11 +32,7 @@ public class MineFragment extends BaseFragment {
     private TextView mTvZxing;
     private TextView mTvMakeErWeiMa;
     private TextView mTvAndroidForJs;
-//    @BindView(R.id.tv_zxing)
-//    TextView mTvZxing;
-//
-//    @BindView(R.id.tv_make_erweima)
-//    TextView mTvMakeErWeiMa;
+    private TextView mTvMusic;
 
     /**
      * 使用单例
@@ -59,10 +56,10 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-//        ButterKnife.bind(this, mRootView);
         mTvZxing = findViewById(R.id.tv_zxing);
         mTvMakeErWeiMa = findViewById(R.id.tv_make_erweima);
         mTvAndroidForJs = findViewById(R.id.androidforjs);
+        mTvMusic = findViewById(R.id.tv_music);
     }
 
     @Override
@@ -70,6 +67,7 @@ public class MineFragment extends BaseFragment {
         mTvZxing.setOnClickListener(this);
         mTvMakeErWeiMa.setOnClickListener(this);
         mTvAndroidForJs.setOnClickListener(this);
+        mTvMusic.setOnClickListener(this);
     }
 
     @Override
@@ -89,25 +87,12 @@ public class MineFragment extends BaseFragment {
             case R.id.androidforjs:
                 startActivity(new Intent(mActivity, AndroidForJsActivity.class));
                 break;
+            case R.id.tv_music:
+                startActivity(new Intent(mActivity, MusicActivity.class));
+                break;
         }
     }
 
-    @OnClick({R.id.tv_zxing, R.id.tv_make_erweima})
-    public void onClickViewed(View view) {
-        switch (view.getId()) {
-            case R.id.tv_zxing:
-                if (hasPermission(Constant.HARDWEAR_CAMERA_PERMISSION)) {
-                    doOpenCamera();
-                } else {
-                    requestPermission(Constant.HARDWEAR_CAMERA_CODE, Constant.HARDWEAR_CAMERA_PERMISSION);
-                }
-                break;
-            case R.id.tv_make_erweima:
-                MyQrCodeDialog dialog = new MyQrCodeDialog(mActivity);
-                dialog.show();
-                break;
-        }
-    }
 
     @Override
     public void doOpenCamera() {

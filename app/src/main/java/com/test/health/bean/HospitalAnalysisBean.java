@@ -40,4 +40,16 @@ public class HospitalAnalysisBean extends AbstractExpandableItem<ValueBean> impl
     public int getItemType() {
         return CollapsibleAdapter.TYPE_HEAD;
     }
+
+    public HospitalAnalysisBean() {
+
+    }
+
+    public HospitalAnalysisBean(int itemType, String key) {
+        this.key = key;
+    }
+
+    public HospitalAnalysisBean(int itemType, List<ValueBean> valueBean) {
+        this.valueBean = valueBean;
+    }
 }

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,7 @@ import com.test.health.bean.HospitalAnalysisBean;
 import com.test.health.bean.ValueBean;
 import com.test.health.ui.activity.AddressActivity;
 import com.test.health.ui.adapter.CollapsibleAdapter;
+import com.test.health.ui.adapter.CollapsibleAdapter1;
 import com.test.health.ui.adapter.FirstFootAdapter;
 import com.test.health.wight.UiUtils;
 
@@ -75,17 +77,12 @@ public class HospitalFragment extends BaseFragment {
     private RecyclerView mRvList;
     private Button mBtReset;
     private Button mBtSure;
-    private HospitalAnalysisBean mHospitalAnalysisBean;
 
     private ArrayList<ValueBean> serverList = new ArrayList<>();//服务
-    private ArrayList<ValueBean> dayList = new ArrayList<>();//营业日
-    private ArrayList<ValueBean> facilityList = new ArrayList<>();//服务设备
     private ArrayList<MultiItemEntity> res = new ArrayList<>();
     private ArrayList<HospitalAnalysisBean> hospitalAnalysis = new ArrayList<>();
     private CollapsibleAdapter collapsibleAdapter;
-    private ArrayList<ValueBean> list;
     private ValueBean valueBean;
-    private HospitalAnalysisBean bean;
 
     /**
      * 使用单例
@@ -219,6 +216,7 @@ public class HospitalFragment extends BaseFragment {
         mBtReset.setOnClickListener(this);
 
         initJsonData();
+
         if (mMenuPop == null) {
             mMenuPop = new PopupWindow(view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
         }
@@ -240,12 +238,16 @@ public class HospitalFragment extends BaseFragment {
      */
     private void initJsonData() {
         if (collapsibleAdapter == null) {
-            collapsibleAdapter = new CollapsibleAdapter(analysisJson(),hospitalAnalysis);
+            collapsibleAdapter = new CollapsibleAdapter(analysisJson(), hospitalAnalysis);
+//            collapsibleAdapter = new CollapsibleAdapter1(mActivity,new ArrayList());
         }
         mRvList.setLayoutManager(new LinearLayoutManager(mActivity));
         mRvList.setAdapter(collapsibleAdapter);
 
     }
+
+    private String[][] mStrings = {{"体检", "齿科", "门诊"}, {"免费WiFi", "免费停车", "英文接待"}, {"周一", "周三", "周五", "周六", "周日"}};
+    private String[] types = {"服务", "服务设施", "营业日"};
 
     /**
      * 解析json

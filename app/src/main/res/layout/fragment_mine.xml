@@ -30,4 +30,13 @@
         android:drawableRight="@mipmap/icon_disclosure_lndicator"
         android:padding="10dp"
         android:text="android 与 js交互" />
+
+    <TextView
+        android:id="@+id/tv_music"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_write_corners"
+        android:drawableRight="@mipmap/icon_disclosure_lndicator"
+        android:padding="10dp"
+        android:text="音频歌词同步" />
 </LinearLayout>
