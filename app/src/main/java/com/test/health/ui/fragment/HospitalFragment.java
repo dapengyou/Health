@@ -35,7 +35,6 @@ import com.test.health.bean.HospitalAnalysisBean;
 import com.test.health.bean.ValueBean;
 import com.test.health.ui.activity.AddressActivity;
 import com.test.health.ui.adapter.CollapsibleAdapter;
-import com.test.health.ui.adapter.CollapsibleAdapter1;
 import com.test.health.ui.adapter.FirstFootAdapter;
 import com.test.health.wight.UiUtils;
 

@@ -31,10 +31,10 @@ public class LricView extends android.support.v7.widget.AppCompatTextView {
     private int currentTextSize = 36;
 
     private int otherColor = Color.BLACK;
-    private int otherTextSize = 20;
+    private int otherTextSize = 36;
 
     // 行间距
-    private int lineSpace = 25;
+    private int lineSpace = 50;
     //当前歌词字体
     private Typeface currentTypeface = Typeface.DEFAULT_BOLD;
     //其他歌词字体
