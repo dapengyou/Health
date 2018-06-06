@@ -25,13 +25,13 @@ public class MusicActivity extends BaseActivity implements TopGradualFragment.On
     private MediaPlayer mp;
     private Fragment mFragment;
 
-    //    @BindView(R.id.framelayout)
+    @BindView(R.id.framelayout)
     FrameLayout mFrameLayout;
 
-    //    @BindView(R.id.tv_name)
+    @BindView(R.id.tv_name)
     TextView mTvName;
 
-    //    @BindView(R.id.rv_list)
+    @BindView(R.id.lricView)
     LricView mLricView;
 
     private boolean isShowWord = false;
@@ -50,11 +50,8 @@ public class MusicActivity extends BaseActivity implements TopGradualFragment.On
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.rl_layout, mFragment)
                 .commit();
-//        ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
-        mFrameLayout = findViewById(R.id.framelayout);
-        mTvName = findViewById(R.id.tv_name);
-        mLricView = findViewById(R.id.lricView);
     }
 
     @Override
@@ -64,28 +61,10 @@ public class MusicActivity extends BaseActivity implements TopGradualFragment.On
 
     @Override
     protected void initListener() {
-        mFrameLayout.setOnClickListener(this);
-        mTvName.setOnClickListener(this);
-        mLricView.setOnClickListener(this);
     }
 
     @Override
     protected void onViewClick(View v) {
-        switch (v.getId()) {
-            case R.id.framelayout:
-            case R.id.tv_name:
-            case R.id.lricView:
-                if (isShowWord) {
-                    isShowWord = false;
-                    mTvName.setVisibility(View.VISIBLE);
-                    mLricView.setVisibility(View.GONE);
-                } else {
-                    isShowWord = true;
-                    mTvName.setVisibility(View.GONE);
-                    mLricView.setVisibility(View.VISIBLE);
-                }
-                break;
-        }
     }
 
     @Override
@@ -106,10 +85,12 @@ public class MusicActivity extends BaseActivity implements TopGradualFragment.On
         }
     }
 
-    @OnClick(R.id.framelayout)
+    @OnClick({R.id.framelayout, R.id.tv_name, R.id.lricView})
     public void onClicked(View view) {
         switch (view.getId()) {
             case R.id.framelayout:
+            case R.id.tv_name:
+            case R.id.lricView:
                 if (isShowWord) {
                     isShowWord = false;
                     mTvName.setVisibility(View.VISIBLE);
