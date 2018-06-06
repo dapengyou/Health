@@ -30,7 +30,7 @@ public class LricView extends android.support.v7.widget.AppCompatTextView {
     private int currentColor = Color.RED;
     private int currentTextSize = 36;
 
-    private int otherColor = Color.BLACK;
+    private int otherColor = Color.WHITE;
     private int otherTextSize = 36;
 
     // 行间距
@@ -54,7 +54,9 @@ public class LricView extends android.support.v7.widget.AppCompatTextView {
         super(context, attrs);
         currentPaint = new Paint();
         otherPaint = new Paint();
-        lyricList = LrcUtils.readLRC(new File("/storage/emulated/0/data/local/234.lrc"));
+        String fileString = context.getExternalCacheDir().getAbsolutePath() + "/local" + "/234.lrc";
+        File file = new File(fileString);
+        lyricList = LrcUtils.readLRC(file);
 
         currentPaint.setColor(currentColor);
         currentPaint.setTextSize(currentTextSize);
