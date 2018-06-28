@@ -7,10 +7,6 @@
     android:background="@color/blue"
     android:fitsSystemWindows="true">
 
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-
     <FrameLayout
         android:id="@+id/framelayout"
         android:layout_width="match_parent"
@@ -34,13 +30,50 @@
     </FrameLayout>
 
     <RelativeLayout
-        android:id="@+id/rl_layout"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_gravity="bottom"
-        android:background="@android:color/transparent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
 
+        <RelativeLayout
+            android:id="@+id/rl_layout"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_layout"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:text="Hello World!" />
+
+        <LinearLayout
+            android:id="@+id/ll_layout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_below="@+id/test"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2" />
+
+            <Button
+                android:id="@+id/bt_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发送" />
+        </LinearLayout>
     </RelativeLayout>
-    <!--</RelativeLayout>-->
 </android.support.design.widget.CoordinatorLayout>

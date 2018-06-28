@@ -34,4 +34,6 @@ dependencies {
     //引入butterKnife
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //im使用的json
+    implementation 'com.alibaba:fastjson:1.2.31'
 }

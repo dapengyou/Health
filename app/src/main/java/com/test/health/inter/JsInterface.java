@@ -6,6 +6,8 @@ import android.webkit.JavascriptInterface;
 import java.util.logging.Handler;
 
 /**
+ * js交互
+ *
  * Created by lady_zhou on 2018/5/18.
  */
 
