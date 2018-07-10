@@ -54,4 +54,6 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile files('libs/AMap3DMap_6.1.0_AMapNavi_6.0.1_AMapSearch_6.1.0_AMapLocation_3.8.0_20180330.jar')
     compile files('libs/pinyin4j-2.5.0.jar')
+
+    api 'de.hdodenhof:circleimageview:2.2.0'//圆形头像
 }

@@ -1,60 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <FrameLayout
-        android:id="@+id/framelayout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/tv_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:text="追梦人" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <com.test.baselibrary.CustomView.LricView
-            android:id="@+id/lricView"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@android:color/transparent"
-            android:visibility="gone" />
+            <FrameLayout
+                android:id="@+id/framelayout"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:gravity="center"
+                    android:text="追梦人" />
+
+                <com.test.baselibrary.CustomView.LricView
+                    android:id="@+id/lricView"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rl_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <!--<TextView-->
+                <!--android:id="@+id/test"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/rl_layout"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginBottom="20dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:gravity="center"-->
+                <!--android:padding="10dp"-->
+                <!--android:text="Hello World!" />-->
+        </LinearLayout>
     </FrameLayout>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
-
-        <RelativeLayout
-            android:id="@+id/rl_layout"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_gravity="bottom"
-            android:background="@android:color/transparent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/test"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_layout"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:padding="10dp"
-            android:text="Hello World!" />
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/ll_layout"
@@ -75,5 +92,7 @@
                 android:layout_height="wrap_content"
                 android:text="发送" />
         </LinearLayout>
-    </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+    </FrameLayout>
+
+
+</LinearLayout>

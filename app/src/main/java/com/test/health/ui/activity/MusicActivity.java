@@ -7,8 +7,10 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.LoginFilter;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import com.test.baselibrary.CustomView.LricView;
 import com.test.baselibrary.base.BaseActivity;
 import com.test.health.R;
+import com.test.health.bean.ChatBean;
 import com.test.health.bean.DummyContent;
 import com.test.health.im.client.AimClient;
 import com.test.health.im.client.intel.AimMessageListener;
@@ -30,13 +33,16 @@ import com.test.health.im.common.packets.Command;
 import com.test.health.im.common.packets.LoginReqBody;
 import com.test.health.im.common.tcp.DefaultHandler;
 import com.test.health.im.common.tcp.TcpPacket;
+import com.test.health.ui.adapter.ChatAdapter;
 import com.test.health.ui.fragment.TopGradualFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,8 +71,12 @@ public class MusicActivity extends BaseActivity implements TopGradualFragment.On
     @BindView(R.id.bt_send)
     Button mBtSend;
 
-    @BindView(R.id.test)
-    TextView mTvTest;
+    @BindView(R.id.rl_layout)
+    RecyclerView mRecyclerView;
+
+    private ChatAdapter mChatAdapter;
+
+    private List<ChatBean> mChatBeanList = new ArrayList<>();
 
     //im类初始化
     static AimClient client = AimClient.getInstance();
@@ -85,13 +95,13 @@ public class MusicActivity extends BaseActivity implements TopGradualFragment.On
     protected void initView(Bundle savedInstanceState) {
         //开始播放音乐
         mp = MediaPlayer.create(this, R.raw.test);
-        mp.start();
+//        mp.start();
 
         //设置Fragment
-        mFragment = TopGradualFragment.newInstance(1);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.rl_layout, mFragment)
-                .commit();
+//        mFragment = TopGradualFragment.newInstance(1);
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.rl_layout, mFragment)
+//                .commit();
 
         //注册butterKnife
         ButterKnife.bind(this);
@@ -101,6 +111,17 @@ public class MusicActivity extends BaseActivity implements TopGradualFragment.On
     @Override
     protected void initData(Intent intent, Bundle savedInstanceState) {
         initIm();
+        initRecycleView();
+    }
+
+    private void initRecycleView() {
+        mChatAdapter = new ChatAdapter(this, new ArrayList());
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mChatAdapter);
+
+        mChatAdapter.setNewData(mChatBeanList);
+        mRecyclerView.smoothScrollToPosition(mChatBeanList.size());
+
     }
 
     private Handler handler = new Handler() {
@@ -110,8 +131,12 @@ public class MusicActivity extends BaseActivity implements TopGradualFragment.On
 
             printJson(msg);
             Log.d("msg", msg.getData().getString("msg"));
-            mTvTest.setText(mContent);
+            if (!TextUtils.isEmpty(mContent)) {
+                mChatBeanList.add(new ChatBean(ChatBean.NORMAL, mContent, "xxx", ""));
 
+                mChatAdapter.setNewData(mChatBeanList);
+                mRecyclerView.smoothScrollToPosition(mChatBeanList.size());
+            }
         }
     };
 
@@ -146,6 +171,9 @@ public class MusicActivity extends BaseActivity implements TopGradualFragment.On
                             mId = jsonObject.optString(key);
                         }
                     }
+                }
+                if("msg".equals(myKey)){
+                    mContent = null;
                 }
 
             }
@@ -208,12 +236,6 @@ public class MusicActivity extends BaseActivity implements TopGradualFragment.On
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (mFragment != null) {
-            mFragment.onActivityResult(requestCode, resultCode, data);
-        }
-    }
 
     /**
      * 点击歌词后view翻转
@@ -254,6 +276,7 @@ public class MusicActivity extends BaseActivity implements TopGradualFragment.On
                         client.sendMsg(chatBody);
                     }
                 }).start();
+                mEtMsg.setText("");
                 break;
         }
     }
