@@ -65,8 +65,11 @@
         <activity
             android:name=".ui.activity.AndroidForJsActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.activity.MusicActivity"
+        <activity
+            android:name=".ui.activity.MusicActivity"
             android:windowSoftInputMode="adjustPan"></activity>
+
+        <service android:name=".MyService" />
     </application>
 
 </manifest>
